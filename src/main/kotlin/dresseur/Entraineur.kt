@@ -1,4 +1,5 @@
 package dresseur
+import changeCouleur
 
 /**
  * Représente un entraîneur dans le contexte du jeu.
@@ -15,6 +16,7 @@ class Entraineur(
     var id: Int,
     var nom: String,
     var argents:Int,
+    var couleur: String
     //TODO equipeMonstre
     //TODO boiteMonstre
     //TODO sacAKube
@@ -27,7 +29,7 @@ class Entraineur(
      * 2. La somme d'argent qu'il possède.
      */
     fun afficheDetail(){
-        println("Dresseur : ${this.nom}")
+        println("Dresseur : "+ changeCouleur(this.nom,couleur))
         println("Argents: ${this.argents} ")
     }
 }

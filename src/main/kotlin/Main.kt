@@ -1,5 +1,25 @@
+import dresseur.Entraineur
+import monstre.EspeceMonstre
+
+/*
+#=============== Entraineurs ===============#
+*/
+
+val joueur = Entraineur(1,"Adrien",0,"cyan")
+val rival = Entraineur(2,"Peter",1000,"rouge")
+
+/*
+#=============== Monstres ===============#
+*/
+
+val tuntung = EspeceMonstre(1,"aquamy", "brainrot",10,8,4,5,7,4,2.0,2.0,2.0,2.0,2.0,2.0,"vivant","fière")
 fun main() {
-    print(changeCouleur("Hello", "rouge")+changeCouleur(" World","bleu")+changeCouleur("!","jaune"))
+
+    joueur.afficheDetail()
+    rival.afficheDetail()
+    joueur.argents+=1500
+    joueur.afficheDetail()
+    print(tuntung.afficheArt())
 }
 
 /**
