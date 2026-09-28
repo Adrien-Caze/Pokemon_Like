@@ -11,4 +11,8 @@ class Zone(val id : Int, var nom : String, var expZone : Int, var monstres : Mut
     fun genererMonstre(){
 
     }
+
+    override fun toString(): String {
+        return "${this.nom}\n${this.zonePrecedante}\n${this.zoneSuivante}\n"
+    }
 }

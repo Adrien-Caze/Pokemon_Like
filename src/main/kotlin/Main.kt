@@ -1,4 +1,5 @@
 import dresseur.Entraineur
+import monde.Zone
 import monstre.EspeceMonstre
 
 /*
@@ -11,15 +12,25 @@ val rival = Entraineur(2,"Peter",1000,"rouge")
 /*
 #=============== Monstres ===============#
 */
-
 val tuntung = EspeceMonstre(1,"aquamy", "brainrot",10,8,4,5,7,4,2.0,2.0,2.0,2.0,2.0,2.0,"vivant","fière")
-fun main() {
+var monstres = mutableListOf(tuntung)
+/*
+#=============== Zones ===============#
+*/
 
-    joueur.afficheDetail()
+var zone1 = Zone(1, "Spawn", 25, monstres, null, null)
+var zone2 = Zone(2, "Tuto", 30, monstres, null, null)
+
+
+fun main() {
+    zone1.zoneSuivante = zone2
+    println(zone1)
+    println(zone2)
+    /*joueur.afficheDetail()
     rival.afficheDetail()
     joueur.argents+=1500
     joueur.afficheDetail()
-    print(tuntung.afficheArt())
+    print(tuntung.afficheArt())*/
 }
 
 /**
