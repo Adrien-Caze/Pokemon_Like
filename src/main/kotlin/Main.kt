@@ -17,7 +17,7 @@ val tuntung = EspeceMonstre(1,"aquamy", "brainrot",15,13,14,15,27,54,2.0,2.0,2.0
 val chimpanzini = EspeceMonstre(2,"flampik", "brainrot",15,13,14,15,27,54,2.0,2.0,2.0,2.0,2.0,2.0,"vivant","fière")
 
 val monstre1 = IndividuMonstre(1, "springleaf", tuntung,joueur,0.0)
-val monstre2 = IndividuMonstre(1, "springleaf", chimpanzini,rival,0.0)
+val monstre2 = IndividuMonstre(1, "springleaf", chimpanzini,null,0.0)
 
 var monstres = mutableListOf(tuntung)
 /*
@@ -29,11 +29,12 @@ var zone2 = Zone(2, "Tuto", 30, monstres, null, null)
 
 
 fun main() {
-    monstre1.exp += 100
-    print(monstre1.montrerStats())
-    print(monstre2.montrerStats())
-    monstre1.attaquer(monstre2)
-    print(monstre1.montrerStats())
+
+    print(monstre1.afficheDetail())
+    monstre1.renommer()
+    print(monstre1.afficheDetail())
+
+
 }
 
 /**

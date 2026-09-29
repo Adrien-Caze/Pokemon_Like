@@ -19,7 +19,7 @@ class EspeceMonstre(
     val modPv: Double,
     val description: String = "",
     val particularites: String = "",
-    val caractères: String = "",
+    val caracteres: String = "",
 ) {
     fun afficheArt(deFace: Boolean=true): String{
         val nomFichier = if(deFace) "front" else "back";

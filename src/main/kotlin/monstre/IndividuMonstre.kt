@@ -1,11 +1,13 @@
 package monstre
 
+import changeCouleur
 import dresseur.Entraineur
+import kotlin.io.println
 import kotlin.random.Random
 import kotlin.math.pow
 
 
-class IndividuMonstre(val id:Int, var nom:String,var espece: EspeceMonstre,var entraineur: Entraineur,expInit:Double){
+class IndividuMonstre(val id:Int, var nom:String,var espece: EspeceMonstre,var entraineur: Entraineur?,expInit:Double){
 
     private fun calculStats(nombre:Int):Int{
         val signes = listOf("-","+")
@@ -65,20 +67,6 @@ class IndividuMonstre(val id:Int, var nom:String,var espece: EspeceMonstre,var e
         pvMax += ((espece.modPv * potentiel)+calculStats(5)).toInt()
     }
 
-    fun montrerStats():String{
-        val msg = "PV : ${this.pv}\n" +
-                "Niveau : ${this.niveau}\n" +
-                "XP : ${this.exp}/${palierExp()}\n" +
-                "Attaque : ${this.attaque}\n" +
-                "Défense : ${this.defense}\n" +
-                "Vitesse : ${this.vitesse}\n" +
-                "Attaque Spe : ${this.attaqueSpe}\n" +
-                "Defense Spe : ${this.defenseSpe}\n" +
-                "PV max : ${this.pvMax}\n" +
-                "Potentel : ${this.potentiel}\n"
-        return msg
-    }
-
     fun attaquer(rival: IndividuMonstre){
 
         var degatsTotal = this.attaque - (rival.defense/2)
@@ -88,6 +76,71 @@ class IndividuMonstre(val id:Int, var nom:String,var espece: EspeceMonstre,var e
         }
         rival.pv -= degatsTotal
         println("${this.nom} inflige $degatsTotal dégats à ${rival.nom}")
+    }
+
+    fun renommer(){
+
+        while(true) {
+            println("Renommer ${this.nom} ? O/n")
+            val choix = readln()
+            if(choix == "o" || choix == "O"){
+                print("Renommer en : ")
+                val nouveauNom = readln()
+                this.nom = nouveauNom
+                break
+
+            }
+            else if(choix == "n" || choix == "N"){
+                break
+            }
+            else{
+                println(changeCouleur("Option invalide !","rouge"))
+            }
+        }
+    }
+
+    fun postCapture() {
+
+        print("Nommer ${this.nom} : ")
+
+        while (true) {
+
+            val nouveauNom = readln()
+
+            if (nouveauNom.isBlank()) {
+                print("Êtes-vous sûr de vouloir garder le nom ${this.nom} ? O/n : ")
+
+                when (readln().lowercase()) {
+                    "o" -> break
+                    "n" -> continue
+                    else -> println(changeCouleur("Option invalide !", "rouge"))
+                }
+
+            } else {
+                print("Êtes-vous sûr de vouloir le nommer $nouveauNom ? O/n : ")
+
+                when (readln().lowercase()) {
+                    "o" -> {
+                        this.nom = nouveauNom
+                        break
+                    }
+                    "n" -> continue
+                    else -> println(changeCouleur("Option invalide !", "rouge"))
+                }
+            }
+        }
+    }
+
+    fun afficheDetail():String{
+        val msg = changeCouleur("=============================\n","vert") +
+                "Nom : ${this.nom}   Niveau : ${this.niveau}\n" +
+                "Exp : ${this.exp}/${palierExp()}\n" +
+                "PV : ${this.pv}/${this.pvMax}\n" +
+                changeCouleur("=============================\n","vert") +
+                changeCouleur("Atq : ","rouge")+"${this.attaque}   "+changeCouleur("Def : ","vert")+"${this.defense}   "+changeCouleur("Vitesse : ","cyan")+"${this.vitesse}\n" +
+                changeCouleur("AtqSpe : ","rouge")+"${this.attaqueSpe}   "+changeCouleur("DefSpe : ","vert")+"${this.defenseSpe}\n" +
+                changeCouleur("=============================\n","vert")
+        return espece.afficheArt()+msg
     }
 
 

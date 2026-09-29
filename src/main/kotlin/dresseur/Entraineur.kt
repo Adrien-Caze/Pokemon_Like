@@ -1,5 +1,7 @@
 package dresseur
 import changeCouleur
+import item.Item
+import monstre.IndividuMonstre
 
 /**
  * Représente un entraîneur dans le contexte du jeu.
@@ -16,7 +18,9 @@ class Entraineur(
     var id: Int,
     var nom: String,
     var argents:Int,
-    var couleur: String
+    var couleur: String,
+    var sacAItem : MutableList<Item>
+    var equipeMonstre: MutableList<IndividuMonstre>
     //TODO equipeMonstre
     //TODO boiteMonstre
     //TODO sacAKube
