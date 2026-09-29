@@ -19,7 +19,7 @@ class Entraineur(
     var nom: String,
     var argents:Int,
     var couleur: String,
-    var sacAItem : MutableList<Item>
+    var sacAItem : MutableList<Item>,
     var equipeMonstre: MutableList<IndividuMonstre>
     //TODO equipeMonstre
     //TODO boiteMonstre
