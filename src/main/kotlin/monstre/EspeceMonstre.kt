@@ -4,8 +4,8 @@ import java.io.File
 /**
  * Une espèce de monstre (le "modèle", comme une fiche de Pokédex).
  *
- * @property base... Statistiques de départ d'un monstre de cette espèce.
- * @property mod... Gain de statistique par niveau (multiplié par le potentiel de l'individu).
+ * //@property base Statistiques de départ d'un monstre de cette espèce.
+ * //@property mod.. Gain de statistique par niveau (multiplié par le potentiel de l'individu).
  * @property description Texte descriptif.
  * @property particularites Particularités de l'espèce.
  * @property caracteres Caractère(s) de l'espèce.

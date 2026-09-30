@@ -16,9 +16,9 @@ val joueur = Entraineur(1,"Adrien",0,"cyan", mutableListOf(),mutableListOf())
 */
 // Espèces. ⚠ PROBLÈME n°17 : `chimpanzini` et `sixSeven` ont le même id (2), et les noms de variables
 // ne correspondent pas aux noms d'espèce ("springleaf", "aquamy", "flamkip"). Les stats sont identiques (copier-coller).
-val tuntung = EspeceMonstre(1,"springleaf", "brainrot",15,13,14,15,27,54,2.0,2.0,2.0,2.0,2.0,2.0,"vivant","fière")
-val chimpanzini = EspeceMonstre(2,"aquamy", "brainrot",15,13,14,15,27,54,2.0,2.0,2.0,2.0,2.0,2.0,"vivant","fière")
-val sixSeven = EspeceMonstre(2,"flamkip", "brainrot",15,13,14,15,27,54,2.0,2.0,2.0,2.0,2.0,2.0,"vivant","fière")
+val tuntung = EspeceMonstre(1,"laoumi", "brainrot",15,13,14,15,27,54,2.0,2.0,2.0,2.0,2.0,2.0,"vivant","fière")
+val chimpanzini = EspeceMonstre(2,"galum", "brainrot",15,13,14,15,27,54,2.0,2.0,2.0,2.0,2.0,2.0,"vivant","fière")
+val sixSeven = EspeceMonstre(2,"bugsyface", "brainrot",15,13,14,15,27,54,2.0,2.0,2.0,2.0,2.0,2.0,"vivant","fière")
 
 // Monstres individuels (⚠ les trois ont l'id 1 ; `var` inutile si jamais réaffectés)
 var monstre1 = IndividuMonstre(1, "springleaf", tuntung,null,0.0)
@@ -41,11 +41,10 @@ fun main() {
     // ⚠ PROBLÈME n°2 : on définit le propriétaire, mais monstre1 n'est PAS ajouté à
     // joueur.equipeDeMonstre (vide). Le menu "Utiliser un objet"/"Changer" plantera ou n'aura aucun effet.
     monstre1.entraineur = joueur
-    /*println(monstre1.afficheDetail())
+    println(monstre1.afficheDetail())
     println(monstre2.afficheDetail())
-    println(monstre3.afficheDetail())*/
+    println(monstre3.afficheDetail())
     val combat = Combat(monstre1,monstre2)
-    // ⚠ Un seul tour est joué puis le programme s'arrête : il manque la boucle de combat.
     combat.actionJoueur()
 
 
