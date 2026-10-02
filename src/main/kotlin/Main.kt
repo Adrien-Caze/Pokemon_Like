@@ -18,11 +18,11 @@ val joueur = Entraineur(1,"Adrien",0,"cyan", mutableListOf(),mutableListOf())
 // Espèces. ⚠ PROBLÈME n°17 : `chimpanzini` et `sixSeven` ont le même id (2), et les noms de variables
 // ne correspondent pas aux noms d'espèce ("springleaf", "aquamy", "flamkip"). Les stats sont identiques (copier-coller).
 val tuntung = EspeceMonstre(1,"laoumi", "brainrot",15,13,14,15,27,54,2.0,2.0,2.0,2.0,2.0,2.0,"vivant","fière")
-val chimpanzini = EspeceMonstre(2,"galum", "brainrot",15,13,14,15,27,54,2.0,2.0,2.0,2.0,2.0,2.0,"vivant","fière")
+val chimpanzini = EspeceMonstre(2,"galum", "brainrot",19,10,10,15,27,54,2.0,2.0,2.0,2.0,2.0,2.0,"vivant","fière")
 val sixSeven = EspeceMonstre(3,"bugsyface", "brainrot",15,13,14,15,27,54,2.0,2.0,2.0,2.0,2.0,2.0,"vivant","fière")
 
-var monstre1 = IndividuMonstre(1, "springleaf", tuntung,null,0.0)
-val monstre2 = IndividuMonstre(2, "aquamy", chimpanzini,null,0.0)
+var monstre1 = IndividuMonstre(1, "springleaf", tuntung,null,1.25)
+val monstre2 = IndividuMonstre(2, "aquamy", chimpanzini,null,2.0)
 val monstre3 = IndividuMonstre(3, "sixseven", sixSeven,null,0.0)
 
 // Liste des espèces d'une zone. ⚠ PROBLÈME n°12 : la MÊME liste est partagée par les deux zones
@@ -45,9 +45,9 @@ fun main() {
     println(monstre2.afficheDetail())
     println(monstre3.afficheDetail())*/
     val combat = Combat(monstre1,monstre2)
-    /*val cube = MonsterKube(1,"SixSeven Kube","Kube de capture",1.25, mutableListOf<IndividuMonstre>())
-    joueur.sacAItem.add(cube)*/
-    print(combat.affichageGameOver())
+    val cube = MonsterKube(1,"SixSeven Kube","Kube de capture",1.25, mutableListOf<IndividuMonstre>())
+    joueur.sacAItem.add(cube)
+    print(combat.combat())
 
 
 }

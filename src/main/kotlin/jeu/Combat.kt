@@ -1,5 +1,6 @@
 package jeu
 
+import changeCouleur
 import joueur
 import monstre.IndividuMonstre
 import java.io.File
@@ -35,6 +36,7 @@ class Combat(val monstreJoueur : IndividuMonstre, val monstreRival: IndividuMons
                 result = false
             } else {
                 result = true
+                println(affichageGameOver())
             }
         }
         return result
@@ -99,5 +101,40 @@ class Combat(val monstreJoueur : IndividuMonstre, val monstreRival: IndividuMons
             }
 
         }
+    }
+
+    fun lancer(): Boolean{
+        var commence = false
+        gameOver()
+        if(monstreJoueur.vitesse > monstreRival.vitesse){
+            commence = true
+            println("Votre Monstre : "+changeCouleur(monstreJoueur.nom,"cyan")+" a été plus rapide, vous commencez !")
+            actionJoueur()
+            actionAdverse()
+        }else {
+            println("Votre Rival : "+ changeCouleur(monstreRival.nom,"rouge")+ "a été plus rapide, Il commence !")
+            actionAdverse()
+            actionJoueur()
+        }
+        return commence
+    }
+    fun tour(quiCommence: Boolean){
+        if(quiCommence){
+
+        }
+    }
+
+    fun combat(){
+        lancer()
+        while(true){
+            if(gameOver()){
+                break
+            }else if(joueurGagne()){
+                break
+            }else{
+
+            }
+        }
+
     }
 }
