@@ -2,6 +2,7 @@ package jeu
 
 import joueur
 import monstre.IndividuMonstre
+import java.io.File
 
 /**
  * Représente un combat entre le monstre du joueur et un monstre rival.
@@ -13,6 +14,13 @@ import monstre.IndividuMonstre
  */
 class Combat(val monstreJoueur : IndividuMonstre, val monstreRival: IndividuMonstre) {
 
+    fun affichageGameOver():String{
+        val art= File("src/main/resources/art/gameover/GameOver.txt").readText()
+        // Remplace "/" par un caractère visuellement proche pour ne pas casser l'affichage
+        val safeArt = art.replace("/", "∕")
+        // Le fichier contient le texte littéral "\u001B" : on le transforme en vrai caractère d'échappement ANSI (couleurs)
+        return safeArt.replace("\\u001B", "\u001B")
+    }
     /**
      * Le joueur a perdu si tous ses monstres sont K.O.
      *
@@ -20,13 +28,13 @@ class Combat(val monstreJoueur : IndividuMonstre, val monstreRival: IndividuMons
      * compte. Si le dernier est K.O. mais pas les autres, renvoie true à tort.
      * Correction : `joueur.equipeDeMonstre.all { it.pv <= 0 }`
      */
-    fun gameOver(): Boolean{
+    fun gameOver(): Boolean {
         var result = false
-        for(i in joueur.equipeDeMonstre){
-            if(i.pv != 0){
+        for (i in joueur.equipeDeMonstre) {
+            if (i.pv != 0) {
                 result = false
-            }else{
-                result =  true
+            } else {
+                result = true
             }
         }
         return result
@@ -40,23 +48,21 @@ class Combat(val monstreJoueur : IndividuMonstre, val monstreRival: IndividuMons
      * CalcExp un Double). L'exp du rival est de plus sa propre exp courante, pas une récompense.
      * ⚠ Un monstre capturé ne devrait pas donner d'exp de victoire : à vérifier selon vos règles.
      */
-    fun joueurGagne(): Boolean{
+    fun joueurGagne(): Boolean {
         var result = false
-        if(monstreRival.pv <= 0){
+        if (monstreRival.pv <= 0) {
             // Rival K.O. : victoire, 20 % de l'exp du rival
             println("${joueur.nom} a gagné !")
-            val CalcExp = monstreRival.exp*0.20
+            val CalcExp = monstreRival.exp * 0.20
             monstreJoueur.exp + CalcExp
             println("${monstreJoueur.nom} gagne $CalcExp exp")
             result = true
-        }
-        else{
+        } else {
             // Rival vivant mais appartenant au joueur = il a été capturé
-            if(monstreRival.entraineur == joueur){
+            if (monstreRival.entraineur == joueur) {
                 println("${monstreRival.nom} a été capturé !")
                 result = true
-            }
-            else{
+            } else {
                 result = false
             }
         }
@@ -66,26 +72,32 @@ class Combat(val monstreJoueur : IndividuMonstre, val monstreRival: IndividuMons
     /**
      * Tour de l'adversaire : il attaque tant qu'il est en vie.
      */
-    fun actionAdverse(){
-        if(monstreRival.pv > 0){
+    fun actionAdverse() {
+        if (monstreRival.pv > 0) {
             monstreRival.attaquer(monstreJoueur)
         }
     }
 
     /**
      * Tour du joueur : menu d'actions.
-     * ⚠ PROBLÈME n°1 : "Utiliser un Objet" ne transmet pas le rival, donc un Kube ne peut
-     * pas le cibler. Aucune réponse à une saisie invalide (le `when` n'a pas de `else`).
      */
     fun actionJoueur(){
-        println("Choisisez votre action :\n" +
-                "1 : Attaquer\n" +
-                "2 : Utiliser un Objet\n" +
-                "3 : Changer de Brainrot\n")
-        when (readln()){
-            "1" -> monstreJoueur.attaquer(monstreRival)
-            "2" -> joueur.voirInventaire()
-            "3" -> joueur.changerMonstre()
+        if (gameOver()) {
+            return
+        }
+        else {
+            println(
+                "Choisisez votre action :\n" +
+                        "1 : Attaquer\n" +
+                        "2 : Utiliser un Objet\n" +
+                        "3 : Changer de Brainrot\n"
+            )
+            when (readln()) {
+                "1" -> monstreJoueur.attaquer(monstreRival)
+                "2" -> joueur.voirInventaire(monstreJoueur,monstreRival)
+                "3" -> joueur.changerMonstre()
+            }
+
         }
     }
 }

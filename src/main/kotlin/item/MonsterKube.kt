@@ -13,7 +13,8 @@ import monstre.IndividuMonstre
  * appartenir à l'[dresseur.Entraineur] (le TODO `boiteMonstre` de sa classe).
  * ⚠ PROBLÈME n°7 : dépendance à la variable globale `joueur` (import de Main.kt).
  */
-class MonsterKube(id: Int, nom: String, description: String, var chanceCapture: Double, var inventaire : MutableList<IndividuMonstre>) : Item(id, nom, description), Utilisable {
+class MonsterKube(id: Int, nom: String, description: String, var chanceCapture: Double, var inventaire : MutableList<IndividuMonstre>) : Item(id, nom, description),
+    Capture {
 
     /**
      * Tente de capturer [cible].

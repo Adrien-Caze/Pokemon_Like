@@ -1,5 +1,6 @@
 package dresseur
 import changeCouleur
+import item.Capture
 import item.Item
 import item.Utilisable
 import monstre.IndividuMonstre
@@ -43,8 +44,8 @@ class Entraineur(
      * Un Kube doit viser le monstre ADVERSE. La cible doit être passée en paramètre.
      * ⚠ PROBLÈME n°2 : equipeDeMonstre[0] plante (IndexOutOfBounds) si l'équipe est vide.
      */
-    fun voirInventaire() {
-        // Rien à afficher si le sac est vide
+
+    fun voirInventaire(joueur : IndividuMonstre, rival : IndividuMonstre) {
         if (sacAItem.isEmpty()) {
             println("Votre sac est vide.")
             return
@@ -69,20 +70,14 @@ class Entraineur(
         }
         if (choix == 0) return
 
-        val item = sacAItem[choix - 1] // -1 : l'affichage commence à 1
-
-        if (item is Utilisable) { // smart cast : item est utilisable dans ce bloc
-            val effet = item.utiliser(equipeDeMonstre[0])
-            if (effet) {
-                println("${item.nom} a été utilisé sur ${equipeDeMonstre[0].nom} !")
-                sacAItem.remove(item) // retirer si l'objet est consommable
-            } else {
-                // ⚠ PROBLÈME n°8 : un Kube raté n'est pas retiré du sac (Kubes infinis en cas d'échec)
-                println("${item.nom} n'a eu aucun effet.")
-            }
-        } else {
-            println("${item.nom} ne peut pas être utilisé.")
+        val item = sacAItem[choix - 1]
+        if(item is Capture){
+            item.utiliser(rival)
         }
+        else if(item is Utilisable){
+            item.utiliser(joueur)
+        }
+
     }
 
     /**
